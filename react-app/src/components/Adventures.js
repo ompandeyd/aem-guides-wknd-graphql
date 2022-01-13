@@ -19,7 +19,7 @@ function Adventures() {
     // If query is not defined, persistent query will be requested
     // Initially use cached / persistent query.
     const [query, setQuery] = useState('');
-    const persistentQuery = 'wknd/adventures-all';
+    const persistentQuery = 'wknd/plain-car-model-query';
     //Use a custom React Hook to execute the GraphQL query
     const { data, errorMessage } = useGraphQL(query, persistentQuery);
 
@@ -32,12 +32,18 @@ function Adventures() {
     return (
         <div className="adventures">
           <button onClick={() => setQuery('')}>All</button>
-          <button onClick={() => setQuery(filterQuery('Camping'))}>Camping</button>
-          <button onClick={() => setQuery(filterQuery('Surfing'))}>Surfing</button>
+          <button onClick={() => setQuery(filterQuery('e-Tron'))}>e-Tron</button>
+          <button onClick={() => setQuery(filterQuery('e-Tron GT'))}>e-Tron GT</button>
+          <button onClick={() => setQuery(filterQuery('A1'))}>A1</button>
+          <button onClick={() => setQuery(filterQuery('A3'))}>A3</button>
+          <button onClick={() => setQuery(filterQuery('A4'))}>A4</button>
+          <button onClick={() => setQuery(filterQuery('A5'))}>A5</button>
+          <button onClick={() => setQuery(filterQuery('A6'))}>A6</button>
+          <button onClick={() => setQuery(filterQuery('A7'))}>A7</button>
           <ul className="adventure-items">
             {
                 //Iterate over the returned data items from the query
-                data.adventureList.items.map((adventure, index) => {
+                data.carModelList.items.map((adventure, index) => {
                     return (
                         <AdventureItem key={index} {...adventure} />
                     );
@@ -52,52 +58,46 @@ function Adventures() {
 function AdventureItem(props) {
 
   //Must have title, path, and image
-  if(!props || !props._path || !props.adventureTitle || !props.adventurePrimaryImage ) {
+  if(!props || !props._path || !props.modelName || !props.modelImage ) {
     return null;
   }
   return (
         <li className="adventure-item">
+          <div className="adventure-item-title">{props.modelName}</div>
           <Link to={`/adventure:${props._path}`}>
-            <img className="adventure-item-image" src={props.adventurePrimaryImage._path} 
-                 alt={props.adventureTitle}/>
+            <img className="adventure-item-image" src={props.modelImage} 
+                 alt={props.modelName}/>
           </Link>
           <div className="adventure-item-length-price">
-            <div className="adventure-item-length">{props.adventureTripLength}</div>
-            <div className="adventure-item-price">{props.adventurePrice}</div>
+          <div className="adventure-item-price">{props.modelPrice}</div>
+          <div className="adventure-item-length">{props.modelDescription}</div>
           </div>
-          <div className="adventure-item-title">{props.adventureTitle}</div>
       </li>
       );
 }
 
 /**
- * Returns a query for Adventures filtered by activity
+ * Returns a query for Car Model filtered by carModelType
  */
-function filterQuery(activity) {
-  return `
-    {
-      adventureList (filter: {
-        adventureActivity: {
-          _expressions: [
-            {
-              value: "${activity}"
-            }
-          ]
-        }
-      }){
-        items {
-          _path
-        adventureTitle
-        adventurePrice
-        adventureTripLength
-        adventurePrimaryImage {
-          ... on ImageRef {
-            _path
-            mimeType
-            width
-            height
+function filterQuery(carModelType) {
+  return `{
+    carModelList (filter: {
+      modelType: {
+        _expressions: [
+          {
+            value: "${carModelType}"
           }
-        }
+        ]
+      }
+    }){
+      items {
+         _path
+        modelName
+        modelBrand
+        modelType
+        modelPrice
+        modelImage
+        modelDescription
       }
     }
   }

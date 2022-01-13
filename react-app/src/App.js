@@ -19,7 +19,7 @@ function App() {
     <Router>
       <div className="App">
         <header>
-          <img src={logo} className="logo" alt="WKND Logo"/>
+          <img src="http://localhost:3000/static/media/wknd-logo-dk.36593320.svg" className="logo" alt="Audi Logo"/>
           <hr />
         </header>
       <Switch>
@@ -41,7 +41,7 @@ function App() {
 function Home() {
   return (
     <div className="Home">
-      <h2>Current Adventures</h2>
+      <h2>Current Models</h2>
       <Adventures />
   </div>
   );

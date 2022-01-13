@@ -39,6 +39,7 @@ function useGraphQL(query, path) {
         })
         .catch((error) => {
           setErrors(error);
+          console.log(error);
         });
     }, [query, path]);
 
