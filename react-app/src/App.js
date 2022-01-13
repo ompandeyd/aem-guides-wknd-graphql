@@ -9,8 +9,7 @@ it.
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import logo from './images/wknd-logo-dk.svg';
-import Adventures from './components/Adventures';
-import AdventureDetail from './components/AdventureDetail';
+import AudiModels from './components/AudiModel.js';
 import './App.scss';
 
 function App() {
@@ -22,10 +21,7 @@ function App() {
           <img src="" className="logo" alt="Audi Logo"/>
           <hr />
         </header>
-      <Switch>
-        <Route path='/adventure:path'>
-          <AdventureDetail />
-        </Route>  
+      <Switch> 
         <Route path="/">
           <Home />
         </Route>
@@ -36,13 +32,13 @@ function App() {
 }
 
 /***
- * Displays a grid of current adventures
+ * Displays a grid of current audiModels
  */
 function Home() {
   return (
     <div className="Home">
       <h2>Current Models</h2>
-      <Adventures />
+      <AudiModels />
   </div>
   );
 }

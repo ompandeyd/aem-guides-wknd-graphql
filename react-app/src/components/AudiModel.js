@@ -10,15 +10,15 @@ import React, {useState} from 'react';
 import useGraphQL from '../api/useGraphQL';
 import Error from './Error';
 import Loading from './Loading';
-import './Adventures.scss';
+import './AudiModel.scss';
 
 
-function Adventures() {
+function AudiModels() {
     //Use React Hooks to set the initial GraphQL query to a variable named `query`
     // If query is not defined, persistent query will be requested
     // Initially use cached / persistent query.
     const [query, setQuery] = useState('');
-    const persistentQuery = 'wknd/plain-car-model-query';
+    const persistentQuery = 'wknd/audi-car-models-query';
     //Use a custom React Hook to execute the GraphQL query
     const { data, errorMessage } = useGraphQL(query, persistentQuery);
 
@@ -29,7 +29,7 @@ function Adventures() {
     if(!data) return <Loading />;
     
     return (
-        <div className="adventures">
+        <div className="audiModels">
           <button onClick={() => setQuery('')}>All</button>
           <button onClick={() => setQuery(filterQuery('e-Tron'))}>e-Tron</button>
           <button onClick={() => setQuery(filterQuery('e-Tron GT'))}>e-Tron GT</button>
@@ -39,12 +39,12 @@ function Adventures() {
           <button onClick={() => setQuery(filterQuery('A5'))}>A5</button>
           <button onClick={() => setQuery(filterQuery('A6'))}>A6</button>
           <button onClick={() => setQuery(filterQuery('A7'))}>A7</button>
-          <ul className="adventure-items">
+          <ul className="audiModel-items">
             {
                 //Iterate over the returned data items from the query
-                data.carModelList.items.map((adventure, index) => {
+                data.carModelList.items.map((audiModel, index) => {
                     return (
-                        <AdventureItem key={index} {...adventure} />
+                        <AudiModelItem key={index} {...audiModel} />
                     );
                 })
             }
@@ -53,21 +53,21 @@ function Adventures() {
     );
 }
 
-// Render individual Adventure item
-function AdventureItem(props) {
+// Render individual AudiModel item
+function AudiModelItem(props) {
 
   //Must have title, path, and image
   if(!props || !props._path || !props.modelName || !props.modelImage ) {
     return null;
   }
   return (
-        <li className="adventure-item">
-          <div className="adventure-item-title">{props.modelName}</div>
-            <img className="adventure-item-image" src={props.modelImage} 
+        <li className="audiModel-item">
+          <div className="audiModel-item-title">{props.modelName}</div>
+            <img className="audiModel-item-image" src={props.modelImage} 
                  alt={props.modelName}/>
-          <div className="adventure-item-length-price">
-          <div className="adventure-item-price">{props.modelPrice}</div>
-          <div className="adventure-item-length">{props.modelDescription}</div>
+          <div className="audiModel-item-length-price">
+          <div className="audiModel-item-price">{props.modelPrice}</div>
+          <div className="audiModel-item-length">{props.modelDescription}</div>
           </div>
       </li>
       );
@@ -83,6 +83,13 @@ function filterQuery(carModelType) {
         _expressions: [
           {
             value: "${carModelType}"
+          }
+        ]
+      }
+      modelBrand: {
+        _expressions: [
+          {
+            value: "Audi"
           }
         ]
       }
@@ -102,4 +109,4 @@ function filterQuery(carModelType) {
 }
 
 
-export default Adventures;
+export default AudiModels;
