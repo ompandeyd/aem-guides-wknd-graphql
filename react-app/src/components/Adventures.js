@@ -7,7 +7,6 @@ accordance with the terms of the Adobe license agreement accompanying
 it.
 */
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
 import useGraphQL from '../api/useGraphQL';
 import Error from './Error';
 import Loading from './Loading';
@@ -64,10 +63,8 @@ function AdventureItem(props) {
   return (
         <li className="adventure-item">
           <div className="adventure-item-title">{props.modelName}</div>
-          <Link to={`/adventure:${props._path}`}>
             <img className="adventure-item-image" src={props.modelImage} 
                  alt={props.modelName}/>
-          </Link>
           <div className="adventure-item-length-price">
           <div className="adventure-item-price">{props.modelPrice}</div>
           <div className="adventure-item-length">{props.modelDescription}</div>
