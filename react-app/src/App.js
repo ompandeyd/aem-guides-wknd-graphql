@@ -10,10 +10,10 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import logo from './images/wknd-logo-dk.svg';
 import AudiModels from './components/AudiModel.js';
+import VwModels from './components/VwModel.js';
 import './App.scss';
 
 function App() {
-
   return (
     <Router>
       <div className="App">
@@ -35,13 +35,23 @@ function App() {
  * Displays a grid of current audiModels
  */
 function Home() {
-  return (
-    <div className="Home">
-      <h2>Current Models</h2>
-      <AudiModels />
-  </div>
-  );
+  var brandName = window.brandName;
+  console.log("Brand Name is :" +brandName);
+  if(brandName === 'Audi') {
+    return (
+      <div className="Home">
+        <h2>Current Audi Models</h2>
+    <AudiModels />
+    </div>
+    );
+  }
+  if(brandName === 'Vw') {
+    return (
+      <div className="Home">
+        <h2>Current VW Models</h2>
+    <VwModels />
+    </div>
+    );
+  }
 }
-
-
 export default App;

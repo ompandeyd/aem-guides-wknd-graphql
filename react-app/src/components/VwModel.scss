@@ -1,0 +1,79 @@
+/*
+Copyright 2020 Adobe
+All Rights Reserved.
+
+NOTICE: Adobe permits you to use, modify, and distribute this file in
+accordance with the terms of the Adobe license agreement accompanying
+it.
+*/
+@import '../styles/variables';
+
+$vwModelItemWidth: 240px;
+$vwModelItemHeight: 200px;
+
+$vwModelItemWidthMobile: 300px;
+$vwModelItemHeightMobile: 250px;
+
+.vwModel-items {
+  display: flex;
+  list-style: none;
+  margin-top: 1em;
+  padding: 0;
+  width: 100%;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: normal;
+}
+
+.vwModel-item {
+  flex-basis: $vwModelItemWidth;
+  margin: 0 0 2rem;
+  padding-right: 14px;
+}
+  
+.vwModel-item-image {
+  width: 100%;
+  height: $vwModelItemHeight;
+  object-fit: cover;
+  object-position: center;
+  overflow: hidden;
+  margin-bottom: 7px;
+}
+  
+  .vwModel-item-title {
+    font-weight: bold;
+    font-size: $font-size-medium;
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+  
+  .vwModel-item-length-price {
+    width: 100%;
+    height: 20px;
+  }
+  
+  .vwModel-item-length {
+    float: left;
+  }
+  
+  .vwModel-item-price {
+    float: right;
+  }
+
+  @media only screen and (max-width: $tablet-breakpoint) {
+    .vwModel-items {
+      justify-content: normal;
+    }
+    .vwModel-item {
+      flex-basis: $vwModelItemWidthMobile;
+    }
+    .vwModel-item-image {
+      height: $vwModelItemHeightMobile;
+    }
+  }
+
+  @media only screen and (max-width: $mobile-breakpoint) {
+    .vwModel-items {
+      justify-content: center;
+    }
+  }
